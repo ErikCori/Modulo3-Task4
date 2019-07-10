@@ -1,0 +1,91 @@
+.container {
+	max-width: 100vw;
+}
+
+/*-----Header-----*/
+.fixed-top {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+header > div,
+.fixed-bottom {
+	background-color: black;
+}
+
+#back {
+	background-color: #358728;
+}
+
+.logo {
+	width: 2.4em;
+	margin: 10px 0;
+}
+
+h1 {
+	color: white;
+	font-size: 1.5em;
+	margin: 15px 0;
+}
+.btn {
+	height: 14vh;
+	color: black;
+	background-color: #bae6b3;
+}
+
+#back-btn {
+	display: none;
+	padding: 5px 10px 5px 0;
+	height: 43px;
+}
+
+#back-btn1 {
+	padding: 5px 10px 5px 0;
+	height: 43px;
+}
+.actualClass {
+	background-color: green;
+}
+
+/*------html-------*/
+
+section {
+	padding-top: 101px;
+	padding-bottom: 80px;
+	overflow: auto;
+}
+
+section > div > p {
+	text-align: center;
+	padding-top: 8px;
+}
+.row {
+}
+
+.card-footer {
+	margin-top: -80px;
+}
+
+@media only screen and (orientation: Portrait) {
+	.showPortrait {
+		display: block;
+	}
+	.showLandscape {
+		display: none;
+	}
+	#table-data {
+		width: 100%;
+	}
+}
+
+@media only screen and (orientation: Landscape) {
+	.showPortrait {
+		display: none;
+	}
+	.showLandscape {
+		display: block;
+	}
+	#table-data {
+		width: 50%;
+	}
+}
