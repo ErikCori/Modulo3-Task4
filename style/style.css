@@ -60,11 +60,16 @@ section > div > p {
 	padding-top: 8px;
 }
 .row {
+	margin-left: 0px;
+	margin-right: 0px;	
 }
 
 .card-footer {
 	margin-top: -80px;
 }
+table, th, td {
+	border: 3px solid black;
+  }
 
 @media only screen and (orientation: Portrait) {
 	.showPortrait {
@@ -85,7 +90,18 @@ section > div > p {
 	.showLandscape {
 		display: block;
 	}
-	#table-data {
-		width: 50%;
-	}
+	
+	.ls-33{
+		height: 80vh;
+		overflow: scroll;
+		width: 33%;
+		float: left;
+		text-align: center;
+	  }
+	.ls-66{
+		width: 66%;
+		float: right;
+		height: 80vh;
+		overflow: scroll;
+	  }
 }

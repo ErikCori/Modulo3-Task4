@@ -14,12 +14,27 @@ var app = new Vue({
 	data: {
 		section: "home",
 		partidos: [],
+		detailedMatch: null,
+		logged:false,
+		forumPosts:[],
+
 	},
 	methods: {
 		selectPlace(url, index) {
 			$("#map-selected").attr("src", url);
 			$(".btn-place-class").removeClass("actualClass");
 			$("#btn-place" + index).addClass("actualClass");
+		},
+		matchDetails(id){
+			for(let i in this.partidos){
+				if(this.partidos[i].matchId == id){
+					this.detailedMatch = this.partidos[i]
+				}
+			}
+		},
+		mForum(id){
+			cleanupUi();
+        	startDatabaseQueries();
 		}
 	}
 })

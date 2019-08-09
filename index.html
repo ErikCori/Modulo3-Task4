@@ -82,14 +82,11 @@
 				<a class="col-12 btn btn-secundary" onclick="cambiarSection('contact')" role="button">
 					<h3 class="float-left">Contact</h3>
 				</a>
-				<a class="col-12 btn btn-secundary" onclick="cambiarSection('matchForum')" role="button">
-					<h3 class="float-left">Forum</h3>
-				</a>
 			</section>
 		</div>
-		<div class="row" v-show="section == 'game_info'">
+		<div v-show="section == 'game_info'">
 			<section>
-				<div class="text-center" style="width: 100%">
+				<div>
 					<h5>Month:
 						<select id="dropMonths">
 							<option value="">All</option>
@@ -97,8 +94,8 @@
 					</h5>
 				</div>
 				<div class="row">
-					<div id="table-data">
-						<table class="table table-bordered">
+					<div id="table-data" class="showPortrait">
+						<table class="table">
 							<thead class="thead">
 								<tr>
 									<th>Date</th>
@@ -109,22 +106,52 @@
 							<tbody>
 								<tr v-for="(partido, index) in partidos">
 									<td>{{partido.date}} At <br> {{partido.times}}</td>
-									<td>{{partido.teams}}</td>
+									<td>{{partido.team1}} VS {{partido.team2}}</td>
 									<td>
-										<a class="showPortrait" v-bind:href="partido.url">{{partido.location}}</a>
-										<a class="showLandscape btn-place-class" v-bind:id="'btn-place' + index"
-											v-on:click="selectPlace(partido.url, index)">{{partido.location}}</a>
+										<a v-bind:href="partido.url">{{partido.location}}</a>
 									</td>
 								</tr>
 							</tbody>
 						</table>
 					</div>
-					<div class="showLandscape" style="width: 50%">
-						<iframe id="map-selected"
-							src="https://www.google.com/maps/d/embed?mid=1QnaR8ef5aC4r4C255jypOHspc2YYhLka"></iframe>
+					<div class="showLandscape">
+						<div id="table-data" class="ls-33">
+							<table class="table">
+								<thead class="thead">
+									<tr>
+										<th>Information</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="(partido, index) in partidos">
+										<td>
+											<h5>{{partido.team1}} VS {{partido.team2}}</h5><br>
+											<h5>Date:{{partido.date}}</h5><br>
+											<h5>Time:{{partido.times}}</h5><br>
+											<button type="button" class="btn" v-on:click="matchDetails(partido.matchId)" :id="partido.matchId">
+												<h5><a class="btn-place-class" v-bind:id="'btn-place' + index"
+														v-on:click="selectPlace(partido.url, index)">{{partido.location}}</a>
+												</h5>
+											</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div class="text-center mb-3 ls-66">
+							<div>
+								<iframe id="map-selected"
+									src="https://www.google.com/maps/d/embed?mid=1QnaR8ef5aC4r4C255jypOHspc2YYhLka" width='100%' height='200' frameborder='0'
+									allowfullscreen></iframe>
+							</div>
+							<div>
+								<button class="btn text-white mt-2" v-on:click="mForum(detailedMatch.id)">
+									<h5><u>Go to match's forum</u></h5>
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
-
 			</section>
 		</div>
 		<div v-show="section == 'game_loc'">
@@ -198,36 +225,13 @@
 				<div class="col-12">
 					<p>
 						<b>More Info:</b> <a href="#" onclick="cambiarSection('home')">www.nysl.com</a>.<br>
-						<b>Mail to:</b> <a href="mailto:michael.randall@chisoccer.org">Michael Randall, League Coordinator</a>.
+						<b>Mail to:</b> <a href="mailto:michael.randall@chisoccer.org">Michael Randall, League
+							Coordinator</a>.
 					</p>
 				</div>
 			</section>
 		</div>
-		<div id="matchForum" v-show="section == 'matchForum'">
-			<div class="col-12">
-				<!--v-show="notLogged"-->
-				<div class="info w-75 d-block m-auto p-2">
-					<h6>Sign in to read, create and comment on posts</h6>
-					<button id="sign-in-button"><i class="fab fa-google mr-2"></i>Sign in with Google</button>
-				</div>
-			</div>
-			<div>
-				<!--v-show="logged"-->
-				<div id="new-post">
-					<div class="info w-75 d-block m-auto p-2">
-						Title:<br>
-						<input type="text" id="new-post-title" class="form-control w-100 d-block m-auto mb-4">
-						Message:<br>
-						<textarea class="form-control w-100 mt-2" rows="3" id="new-post-message"></textarea>
-						<button class="btn mt-2" id="add-post-button">
-							<h6>Add new post</h6>
-						</button>
-					</div>
-				</div>
-				<h3>Latest post</h3>
-			</div>
-		</div>
-
+		
 	</div>
 
 	<footer class="col-12 card-footer">
@@ -239,15 +243,16 @@
 	<script src="script/nysl_partidos.js"></script>
 	<script src="script/mainVue.js"></script>
 	<script src="script/main.js"></script>
+	<script src="script/chat.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-	</script>
+		</script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
 		integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
-	</script>
+		</script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/js/bootstrap.min.js"
 		integrity="sha384-o+RDsa0aLu++PJvFqy8fFScvbHFLtbvScb8AjopnFD+iEQ7wo/CG0xlczd+2O/em" crossorigin="anonymous">
-	</script>
+		</script>
 
 </body>
 
